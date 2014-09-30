@@ -1,0 +1,6 @@
+gunicorn==19.1.1
+html5lib==1.0b3
+libxml2==2.7.8
+lxml==3.4.0
+psycopg2==2.5.4
+requests==2.3.0
