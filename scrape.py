@@ -42,14 +42,14 @@ def scrape(*args):
             movies = page.xpath('//td[@class="title"]/a/text()')
             for i, movie in enumerate(movies):
                 try:
-                    print genre, str(start+i), title 
+                    print genre, str(start+i), movie 
                     cur.execute('INSERT INTO MOVIES (TITLE) VALUES (%s)', (movie,))
                 except psycopg2.IntegrityError:
                     print 'ERROR !'
                     pass
             conn.commit()
-            time.sleep(1)
-        time.sleep(2.5)
+            time.sleep(0.5)
+        time.sleep(1.5)
 
 
 scrape()
