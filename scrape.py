@@ -36,7 +36,7 @@ def scrape(*args):
     url = 'http://www.imdb.com/search/title?at=0&genres=<g>&sort=user_rating&start=<s>&title_type=feature'
     for genre in genres:
         url2 = url.replace('<g>', genre)
-        for start in xrange(1, 751, 50):
+        for start in xrange(1, 451, 50):
             page_url = url2.replace('<s>', str(start))
             page = etree.HTML(requests.get(page_url).content)
             movies = page.xpath('//td[@class="title"]/a/text()')
@@ -44,7 +44,7 @@ def scrape(*args):
                 try:
                     print genre, str(start+i), movie 
                     cur.execute('INSERT INTO MOVIES (TITLE) VALUES (%s)', (movie,))
-                except psycopg2.IntegrityError:
+                except Exception:
                     pass
             conn.commit()
             time.sleep(0.5)
