@@ -34,7 +34,7 @@ def scrape(*args):
     genre_page = etree.HTML(requests.get('http://www.imdb.com/genre').content)
     genres = [x.lower() for x in genre_page.xpath('//table[@class="splash"]//a/text()')]
     url = 'http://www.imdb.com/search/title?at=0&genres=<g>&sort=user_rating&start=<s>&title_type=feature'
-    for genre in genres:
+    for genre in genres[14:]:
         url2 = url.replace('<g>', genre)
         for start in xrange(1, 451, 50):
             page_url = url2.replace('<s>', str(start))
