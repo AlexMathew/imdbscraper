@@ -45,7 +45,6 @@ def scrape(*args):
                     print genre, str(start+i), movie 
                     cur.execute('INSERT INTO MOVIES (TITLE) VALUES (%s)', (movie,))
                 except psycopg2.IntegrityError:
-                    print 'ERROR !'
                     pass
             conn.commit()
             time.sleep(0.5)
