@@ -40,10 +40,12 @@ def scrape(*args):
             page_url = url2.replace('<s>', str(start))
             page = etree.HTML(requests.get(page_url).content)
             movies = page.xpath('//td[@class="title"]/a/text()')
-            for movie in movies:
+            for i, movie in enumerate(movies):
                 try:
+                    print genre, str(start+i), title 
                     cur.execute('INSERT INTO MOVIES (TITLE) VALUES (%s)', (movie,))
                 except psycopg2.IntegrityError:
+                    print 'ERROR !'
                     pass
             conn.commit()
             time.sleep(1)
